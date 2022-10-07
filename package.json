@@ -12,14 +12,12 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "color": "^4.0.2",
+    "color": "^4.2.3",
     "color-namer": "^1.4.0",
     "convert-svg-to-jpeg": "^0.5.0",
-    "esm": "^3.2.20",
-    "express": "^4.17.1",
-    "jsdom": "^18.0.0",
+    "esm": "^3.2.25",
+    "express": "^4.18.1",
+    "jsdom": "^18.1.1",
     "random-name": "^0.1.2"
-  },
-  "devDependencies": {
   }
 }
