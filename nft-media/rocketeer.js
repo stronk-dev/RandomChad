@@ -78,9 +78,15 @@ async function generateRocketeer(id) {
   });
 
   // Generate, compile and upload image
+  const { NODE_ENV: mode } = process.env;
+  let path;
+  if (mode == "production"){
+    path = '/var/www/avatars/' + id
+  }else{
+    path = './output/' + id
+  }
   rocketeer.image = await svgFromAttributes(
-    rocketeer.attributes,
-    `./output/${id}`
+    rocketeer.attributes, path
   );
 
   // Namify the attributes
