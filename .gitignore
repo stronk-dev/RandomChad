@@ -1,6 +1,5 @@
 .*
 node_modules
 build/
-docs/
 *.log
-.backups
+notes.txt

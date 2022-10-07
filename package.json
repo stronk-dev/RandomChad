@@ -1,24 +1,25 @@
 {
-  "name": "rocketeer-nft",
+  "name": "RandomChad",
   "version": "0.0.1",
   "description": "",
-  "main": "truffle-config.js",
-  "directories": {
-    "test": "test"
-  },
+  "main": "index.js",
+  "module": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "backup": "caffeinate zsh ./scripts/backup-images.zsh"
+    "start": "NODE_ENV=production node ./index.js",
+    "dev": "NODE_ENV=development nodemon ./index.js"
   },
-  "author": "Mentor Palokaj <mentor@palokaj.co> (http://github.com/actuallymentor)",
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "",
   "dependencies": {
-    "@openzeppelin/contracts": "^4.3.2",
-    "@truffle/hdwallet-provider": "^1.5.1",
-    "dotenv": "^10.0.0",
-    "truffle-ledger-provider": "^1.0.3"
+    "color": "^4.0.2",
+    "color-namer": "^1.4.0",
+    "convert-svg-to-jpeg": "^0.5.0",
+    "esm": "^3.2.20",
+    "express": "^4.17.1",
+    "jsdom": "^18.0.0",
+    "random-name": "^0.1.2"
   },
   "devDependencies": {
-    "truffle-plugin-verify": "^0.5.18"
   }
 }
