@@ -70,12 +70,12 @@ async function generateRocketeer(id) {
 
   // Generate, compile and upload image
   const { NODE_ENV: mode } = process.env;
-  let path;
-  if (mode == "production") {
-    path = "/var/www/avatars/" + id;
-  } else {
-    path = "./output/" + id;
-  }
+  let path = "./output/" + id;
+//   if (mode == "production") {
+//     path = "/var/www/avatars/" + id;
+//   } else {
+//     path = "./output/" + id;
+//   }
   rocketeer.image = await svgFromAttributes(rocketeer.attributes, path);
 
   // Namify the attributes
@@ -87,7 +87,7 @@ async function generateRocketeer(id) {
     };
   });
 
-  return rocketeer.name + ": `" + "' @ " + rocketeer.image;
+  return rocketeer.name + ": `" + rocketeer.description + "' @ " + rocketeer.image;
 }
 
 module.exports = {
