@@ -2,7 +2,8 @@ const { generateRocketeer } = require("./nft-media/rocketeer");
 
 (async () => {
   try {
-    for (var id = 1; id <= 3475; id++) {
+    while (true) {
+      const id = Math.floor(Math.random() * (999998) + 1)
       console.log("Generating Cpn Chad " + id);
       console.log(await generateRocketeer(id));
     }

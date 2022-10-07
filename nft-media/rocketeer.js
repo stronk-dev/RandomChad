@@ -33,14 +33,6 @@ async function generateRocketeer(id) {
     value: Math.floor(Date.now() / 1000),
   });
 
-  // Special editions
-  const edition = { trait_type: "edition", value: "regular" };
-  if (id <= 50) edition.value = "genesis";
-  if (id >= 3475 - 166) edition.value = "straggler";
-  if (id % 42 === 0) edition.value = "hitchhiker";
-  if ((id - 1) % 42 == 0) edition.value = "generous";
-  rocketeer.attributes.push(edition);
-
   // Create description
   rocketeer.description = `${rocketeer.name} is a proud member of the ${
     rocketeer.attributes.find(({ trait_type }) => trait_type == "patch").value
@@ -95,7 +87,7 @@ async function generateRocketeer(id) {
     };
   });
 
-  return rocketeer.image;
+  return rocketeer.name + ": `" + "' @ " + rocketeer.image;
 }
 
 module.exports = {
