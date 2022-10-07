@@ -54,7 +54,7 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
   // ///////////////////////////////
   // Attribute selection
   // ///////////////////////////////
-	console.log("Removing unused attributes from master");
+  console.log("Removing unused attributes from master");
 
   // Remove obsolete patches
   const obsoletePatches = [
@@ -75,9 +75,16 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
     (p) => p !== helmet
   );
   for (let i = obsoleteHelmets.length - 1; i >= 0; i--) {
-    const element = document.querySelector(`#${obsoleteHelmets[i]}`);
-    if (element) element.remove();
-    else console.log(`Could not find #${obsoleteHelmets[i]}`);
+    {
+      let element = document.querySelector(`#${obsoleteHelmets[i]}` + "_front");
+      if (element) element.remove();
+      else console.log(`#${obsoleteHelmets[i]}` + "_front");
+    }
+    {
+      let element = document.querySelector(`#${obsoleteHelmets[i]}` + "_back");
+      if (element) element.remove();
+      else console.log(`#${obsoleteHelmets[i]}` + "_back");
+    }
   }
 
   // Remove panel if need be
@@ -135,7 +142,7 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
   // ///////////////////////////////
   // Color substitutions
   // ///////////////////////////////
-	console.log("Substituting colours from master");
+  console.log("Substituting colours from master");
   const defaultPrimary = /rgb\( ?252 ?, ?186 ?, ?157 ?\)/gi;
   const defaultVisor = /rgb\( ?71 ?, ?22 ?, ?127 ?\)/gi;
   const defaultAccent = /rgb\( ?243 ?, ?99 ?, ?113 ?\)/gi;
@@ -160,7 +167,6 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
 
   console.log("Writing to `" + path + ".svg`...");
   await fs.writeFile(`${path}.svg`, bakedSvg);
-
 
   // Return public url
   return "Paths: '" + `${path}.svg` + "'";

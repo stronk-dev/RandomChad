@@ -13,7 +13,6 @@ const svgFromAttributes = require("./svg-generator");
 // Rocketeer generator
 // ///////////////////////////////
 async function generateRocketeer(id) {
-
   // The base object of a new Rocketeer
   const rocketeer = {
     name: `${name.first()} ${name.middle()} ${name.last()} of ${
@@ -80,14 +79,12 @@ async function generateRocketeer(id) {
   // Generate, compile and upload image
   const { NODE_ENV: mode } = process.env;
   let path;
-  if (mode == "production"){
-    path = '/var/www/avatars/' + id
-  }else{
-    path = './output/' + id
+  if (mode == "production") {
+    path = "/var/www/avatars/" + id;
+  } else {
+    path = "./output/" + id;
   }
-  rocketeer.image = await svgFromAttributes(
-    rocketeer.attributes, path
-  );
+  rocketeer.image = await svgFromAttributes(rocketeer.attributes, path);
 
   // Namify the attributes
   rocketeer.attributes = rocketeer.attributes.map((attribute) => {
