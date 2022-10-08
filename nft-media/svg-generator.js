@@ -165,7 +165,9 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
     `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">`,
     document.querySelector("svg").outerHTML,
   ].join("");
-
+  
+  const dir = path.split('/').slice(0, -1).join('/');
+  await fs.mkdir(dir, { recursive: true });
   console.log("Writing to `" + path + ".svg`...");
   await fs.writeFile(`${path}.svg`, bakedSvg);
 
