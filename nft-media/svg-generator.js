@@ -58,6 +58,7 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
 
   // Remove obsolete patches
   const obsoletePatches = [
+    "livepeer",
     "nimbus",
     "teku",
     "lighthouse",

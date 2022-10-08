@@ -82,11 +82,12 @@ exports.globalAttributes = [
   {
     trait_type: "patch",
     values: [
+      { value: "livepeer", probability: 0.2 },
       { value: "nimbus", probability: 0.1 },
       { value: "teku", probability: 0.1 },
       { value: "lighthouse", probability: 0.1 },
       { value: "prysm", probability: 0.2 },
-      { value: "rocketpool", probability: 0.5 },
+      { value: "rocketpool", probability: 0.3 },
     ],
   },
   {
