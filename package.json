@@ -1,6 +1,6 @@
 {
   "name": "RandomChad",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "index.js",
   "module": "index.js",
@@ -12,10 +12,8 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "color": "^4.2.3",
-    "color-namer": "^1.4.0",
-    "jsdom": "^18.1.1",
-    "random-name": "^0.1.2"
+    "config": "^3.3.8",
+    "jsdom": "^18.1.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

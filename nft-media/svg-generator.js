@@ -9,9 +9,7 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
   if (!attributes.length)
     throw new Error("svgFromAttributes missing attributes");
 
-  console.log("Checking attributes");
-
-  // Get properties
+  console.log("Getting attributes...");
   const { value: primary_color } = attributes.find(
     ({ trait_type }) => trait_type == "outfit color"
   );
@@ -43,20 +41,15 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
     ({ trait_type }) => trait_type == "background complexity"
   );
 
-  console.log("Reading master file");
-
+  console.log("Reading master file...");
   // Generate DOM to work with
   const svgString = await fs.readFile(masterPath, { encoding: "utf8" });
   const {
     window: { document },
   } = new JSDOM(svgString);
 
-  // ///////////////////////////////
-  // Attribute selection
-  // ///////////////////////////////
   console.log("Removing unused attributes from master");
-
-  // Remove obsolete patches
+  // Remove unused patches
   const obsoletePatches = [
     "livepeer",
     "nimbus",
@@ -71,7 +64,7 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
     else console.log(`Could not find #${obsoletePatches[i]}`);
   }
 
-  // Remove obsolete hemets
+  // Remove unused helmets
   const obsoleteHelmets = ["classic", "racer", "punk", "knight", "geek"].filter(
     (p) => p !== helmet
   );
@@ -88,21 +81,21 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
     }
   }
 
-  // Remove panel if need be
+  // Remove unused panels
   if (panel === "no") {
     const element = document.querySelector(`#panel`);
     if (element) element.remove();
     else console.log(`Could not find #panel`);
   }
 
-  // Remove backpack if need be
+  // Remove unused backpacks
   if (backpack === "no") {
     const element = document.querySelector(`#backpack`);
     if (element) element.remove();
     else console.log("Could not find #backpack");
   }
 
-  // Remove obsolete backgrounds
+  // Remove unused backgrounds
   const obsoleteBackgrounds = [
     "planets",
     "system",
@@ -117,11 +110,7 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
     else console.log(`Could not find #${obsoleteBackgrounds[i]}`);
   }
 
-  // ///////////////////////////////
-  // Background customisation
-  // ///////////////////////////////
-
-  // In playful, keeping things is basic, removing them is cool
+  // With a playful background: more rarity->less complexity
   if (background === "playful") {
     const toRemove = background_complexity;
     for (let i = 1; i <= toRemove; i++) {
@@ -130,8 +119,7 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
       else console.log(`Could not find #playful-element-${5 - i}`);
     }
   } else {
-    // In others, keeping is cool, and removing is less cool
-    // so higher rarity means less looping
+    // With a playful background: more rarity->more complexity
     const toRemove = 4 - background_complexity;
     for (let i = 1; i <= toRemove; i++) {
       const element = document.querySelector(`#${background}-element-${5 - i}`);
@@ -140,9 +128,7 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
     }
   }
 
-  // ///////////////////////////////
-  // Color substitutions
-  // ///////////////////////////////
+  // Substitute master colours for generated ones
   console.log("Substituting colours from master");
   const defaultPrimary = /rgb\( ?252 ?, ?186 ?, ?157 ?\)/gi;
   const defaultVisor = /rgb\( ?71 ?, ?22 ?, ?127 ?\)/gi;
@@ -159,18 +145,19 @@ module.exports = async function svgFromAttributes(attributes = [], path = "") {
   replace(defaultVisor, visor_color);
   replace(defaultBackpack, backpack_color);
 
-  console.log("Baking SVG now...");
+  console.log("Generating SVG...");
   const bakedSvg = [
     `<?xml version="1.0" encoding="UTF-8" standalone="no"?>`,
     `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">`,
     document.querySelector("svg").outerHTML,
   ].join("");
   
+  // Write SVG to file
   const dir = path.split('/').slice(0, -1).join('/');
   await fs.mkdir(dir, { recursive: true });
   console.log("Writing to `" + path + ".svg`...");
   await fs.writeFile(`${path}.svg`, bakedSvg);
 
-  // Return public url
-  return "Paths: '" + `${path}.svg` + "'";
+  // Return output location
+  return `${path}.svg`;
 };

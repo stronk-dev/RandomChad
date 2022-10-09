@@ -4,3 +4,4 @@ build/
 notes.txt
 output
 converted
+package-lock.json

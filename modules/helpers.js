@@ -1,16 +1,5 @@
-// ///////////////////////////////
-// Helper functions
-// ///////////////////////////////
-exports.dev = !!process.env.development;
-const log = (...messages) => {
-  if (process.env.development) console.log(...messages);
-};
-exports.log = log;
-
-// Wait in async
-const wait = (timeInMs) =>
-  new Promise((resolve) => setTimeout(resolve), timeInMs);
-exports.wait = wait;
+const config = require("config");
+const parameters = config.get("generate");
 
 // Pick random item from an array
 const pickRandomArrayEntry = (array) =>
@@ -50,91 +39,61 @@ exports.pickRandomAttributes = (attributes) => {
   }));
 };
 
-const nameColor = require("color-namer");
-const Color = require("color");
-exports.getColorName = (rgb) => {
-  try {
-    return nameColor(rgb).basic[0].name;
-  } catch (e) {
-    return rgb;
-  }
-};
-exports.getRgbArrayFromColorName = (name) => {
-  const { hex } = nameColor(name).basic[0];
-  const color = Color(hex);
-  return color.rgb().array();
-};
-
-// ///////////////////////////////
-// Attribute sources
-// ///////////////////////////////
+// Define all Captain Chad attributes
 exports.globalAttributes = [
   {
     trait_type: "helmet",
     values: [
-      { value: "classic", probability: 0.2 },
-      { value: "racer", probability: 0.1 },
-      { value: "punk", probability: 0.1 },
-      { value: "knight", probability: 0.2 },
-      { value: "geek", probability: 0.2 },
+      { value: "classic", probability: parameters.helmet.classic },
+      { value: "racer", probability: parameters.helmet.racer },
+      { value: "punk", probability: parameters.helmet.punk },
+      { value: "knight", probability: parameters.helmet.knight },
+      { value: "geek", probability: parameters.helmet.geek },
     ],
   },
   {
     trait_type: "patch",
     values: [
-      { value: "livepeer", probability: 0.2 },
-      { value: "nimbus", probability: 0.1 },
-      { value: "teku", probability: 0.1 },
-      { value: "lighthouse", probability: 0.1 },
-      { value: "prysm", probability: 0.2 },
-      { value: "rocketpool", probability: 0.3 },
+      { value: "livepeer", probability: parameters.patch.livepeer },
+      { value: "nimbus", probability: parameters.patch.livepeer },
+      { value: "teku", probability: parameters.patch.livepeer },
+      { value: "lighthouse", probability: parameters.patch.livepeer },
+      { value: "prysm", probability: parameters.patch.livepeer },
+      { value: "rocketpool", probability: parameters.patch.livepeer },
     ],
   },
   {
     trait_type: "backpack",
     values: [
-      { value: "yes", probability: 0.9 },
-      { value: "no", probability: 0.1 },
+      { value: "yes", probability: parameters.backpack.yes },
+      { value: "no", probability: parameters.backpack.no },
     ],
   },
   {
     trait_type: "panel",
     values: [
-      { value: "yes", probability: 0.9 },
-      { value: "no", probability: 0.1 },
+      { value: "yes", probability: parameters.panel.yes },
+      { value: "no", probability: parameters.panel.no },
     ],
   },
   {
     trait_type: "background",
     values: [
-      { value: "planets", probability: 0.2 },
-      { value: "system", probability: 0.2 },
-      { value: "playful", probability: 0.1 },
-      { value: "moon", probability: 0.05 },
-      { value: "galaxy", probability: 0.2 },
-      { value: "chip", probability: 0.05 },
+      { value: "planets", probability: parameters.background.planets },
+      { value: "system", probability: parameters.background.system },
+      { value: "playful", probability: parameters.background.playful },
+      { value: "moon", probability: parameters.background.moon },
+      { value: "galaxy", probability: parameters.background.galaxy },
+      { value: "chip", probability: parameters.background.chip },
     ],
   },
   {
     trait_type: "background complexity",
     values: [
-      { value: 1, probability: 0.05 },
-      { value: 2, probability: 0.1 },
-      { value: 3, probability: 0.1 },
-      { value: 4, probability: 0.75 },
+      { value: 1, probability: parameters.backgroundComplexity.complex },
+      { value: 2, probability: parameters.backgroundComplexity.med },
+      { value: 3, probability: parameters.backgroundComplexity.low },
+      { value: 4, probability: parameters.backgroundComplexity.basic },
     ],
   },
-];
-exports.heavenlyBodies = [
-  "Mercury",
-  "Venus",
-  "Earth",
-  "Mars",
-  "Jupiter",
-  "Saturn",
-  "Uranus",
-  "Neptune",
-  "Pluto",
-  "the Moon",
-  "the Sun",
 ];

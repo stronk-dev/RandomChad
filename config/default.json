@@ -1,0 +1,48 @@
+{
+  "control": {
+    "iterations": 500,
+    "threads": 1,
+    "minId": 1,
+    "maxId": 999998,
+    "path": "./output/"
+  },
+  "generate": {
+    "helmet": {
+      "classic": 0.2,
+      "racer": 0.1,
+      "punk": 0.1,
+      "knight": 0.2,
+      "geek": 0.2
+    },
+    "patch": {
+      "livepeer": 0.2,
+      "nimbus": 0.1,
+      "teku": 0.1,
+      "lighthouse": 0.1,
+      "prysm": 0.2,
+      "rocketpool": 0.3
+    },
+    "backpack": {
+      "yes": 0.9,
+      "no": 0.1
+    },
+    "panel": {
+      "yes": 0.9,
+      "no": 0.1
+    },
+    "background": {
+      "planets": 0.2,
+      "system": 0.2,
+      "playful": 0.1,
+      "moon": 0.05,
+      "galaxy": 0.2,
+      "chip": 0.05
+    },
+    "backgroundComplexity": {
+      "complex": 0.1,
+      "med": 0.15,
+      "low": 0.25,
+      "basic": 0.50
+    }
+  }
+}
