@@ -18,9 +18,8 @@ const { generateRocketeer } = require("./nft-media/rocketeer");
     // Generate new Captain Chad's
     while (todo) {
       const id = Math.floor(Math.random() * (maxId) + minId)
-      console.log("Generating Cpn Chad " + id);
+      console.log("Generating Cpn Chad #" + id + " (" + todo-- + " left)");
       console.log(await generateRocketeer(id, basePath));
-      todo--;
     }
     process.exit(0);
   } catch (err) {
